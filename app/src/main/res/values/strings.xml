@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Bussines version 1.0</string>
+    <string name="txt_intro">Con esta app, podrás llevar un inventario de tus
+        prouctos. Registro: Podras guardar / modificar la información de tus productos
+    Venta: Llevar el control de los productos que vendes
+    Consulta: Verificar el valor de tus productos
+    Ganancias: De acuerdo a tus ventas, lleva el control de tus ganancias</string>
+    <string name="bt_registro">REGISTRAR</string>
+    <string name="bt_venta">VENDER</string>
+    <string name="bt_consulta">CONSULTAR TU PRODUCTO</string>
+    <string name="bt_guardar">GUARDAR</string>
+    <string name="bt_modificar">MODIFICAR</string>
+    <string name="BT_limpiar">LIMPIAR CAMPOS</string>
+    <string name="bt_Inventario">INVENTARIO</string>
+    <string name="bt_escanear">ESCANEAR</string>
+    <string name="bt_valorestotales">Valores Totales</string>
+    <string name="bt_gtotales">Ganancia Totales</string>
+    <string name="bt_imagen">Imagen</string>
+    <string name="chb_fecha">Fecha</string>
+    <string name="chb_total">Totales</string>
+    <string name="chb_prod">Producto</string>
+    <string name="txt_codigo">Código de producto</string>
+    <string name="txt_descripcion">Descripción - 20 caracteres</string>
+    <string name="txt_valorcompra">Precio unitario Compra</string>
+    <string name="txt_valorventa">Precio unitario Venta </string>
+    <string name="txt_unidades">Unidades a guardar</string>
+    <string name="txt_uvendidas">Unidades a vender</string>
+    <string name="txt_valcompradas">Valor de compra</string>
+
+    <string-array name="Months">
+        <item>Enero</item>
+        <item>Febrero</item>
+        <item>Marzo</item>
+        <item>Abril</item>
+        <item>Mayo</item>
+        <item>Junio</item>
+        <item>Julio</item>
+        <item>Agosto</item>
+        <item>Septiembre</item>
+        <item>Octubre</item>
+        <item>Noviembre</item>
+        <item>Diciembre</item>
+    </string-array>
+</resources>

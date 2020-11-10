@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "Bussines version 1.0"

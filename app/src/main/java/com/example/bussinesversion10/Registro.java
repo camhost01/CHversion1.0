@@ -40,7 +40,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Registro extends AppCompatActivity implements View.OnClickListener{
     private Button bt_guardar,bt_modificar,bt_consultar;
-    private ImageButton bt_imagen,bt_escanear;
+    private ImageButton bt_imagen,bt_escanear,bt_agregar,bt_quitar;
     private EditText et_codigo,et_descripcion,et_vcompra,et_unidades,et_vventa;
     private ImageView imagen;
     private LinearLayout ln;
@@ -69,6 +69,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         bt_modificar=(Button)findViewById(R.id.bt_modificar);
         bt_consultar=(Button)findViewById(R.id.bt_cons);
         bt_imagen=(ImageButton)findViewById(R.id.bt_imagen);
+        bt_agregar=(ImageButton)findViewById(R.id.imageButton);
+        bt_quitar=(ImageButton)findViewById(R.id.imageButton2);
 
 
         bt_guardar.setOnClickListener(this);
@@ -76,6 +78,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         bt_escanear.setOnClickListener(this);
         bt_consultar.setOnClickListener(this);
         bt_imagen.setOnClickListener(this);
+        bt_agregar.setOnClickListener(this);
+        bt_quitar.setOnClickListener(this);
 
         et_codigo = (EditText)findViewById(R.id.txt_codigo);
         et_descripcion = (EditText)findViewById(R.id.txt_descripcion);
@@ -98,12 +102,15 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         String unidades = et_unidades.getText().toString();
         String vuventa = et_vventa.getText().toString();
 
-        if(!codigo.isEmpty()&&!descripcion.isEmpty()&&!vucompra.isEmpty()&&!unidades.isEmpty()&&!vuventa.isEmpty()&&imagen.isShown()){
+        if(!codigo.isEmpty()&&!descripcion.isEmpty()&&!vucompra.isEmpty()&&!unidades.isEmpty()&&!vuventa.isEmpty()){
 
             unid = Integer.parseInt(unidades);
             valorunidadcom = Integer.parseInt(vucompra);
             TotalCompra= unid*valorunidadcom;
             valoruniventa = Integer.parseInt(vuventa);
+            if(!imagen.isShown()){
+                imagen.setImageResource(R.mipmap.noproduct);
+            }
             byte[] NewEntryImg = imgeViewToByte(imagen);
             String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
             ContentValues guardarprod = new ContentValues();
@@ -136,7 +143,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                 Toast.makeText(this, "Producto existente, modificalo para Actualizar Stock", Toast.LENGTH_SHORT).show();
             }
         }else{
-            Toast.makeText(this, "Debes ingresar información en todos los campos junto con la Imagen", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Debes ingresar información en todos los campos", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -247,7 +254,28 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
             case R.id.bt_imagen:
                 cargarImagen();
                 break;
+            case R.id.imageButton:
+                adduni();
+                break;
+            case R.id.imageButton2:
+                deluni();
+                break;
         }
+    }
+
+    private void deluni() {
+        int valor1 = Integer.parseInt(et_unidades.getText().toString());
+        valor1--;
+        if(valor1==0)valor1=1;
+        String value = Integer.toString(valor1);
+        et_unidades.setText(value);
+    }
+
+    private void adduni() {
+        int valor1 = Integer.parseInt(et_unidades.getText().toString());
+        valor1++;
+        String value = Integer.toString(valor1);
+        et_unidades.setText(value);
     }
 
     private void cargarImagen() {

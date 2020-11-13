@@ -7,7 +7,7 @@
     Ganancias: De acuerdo a tus ventas, lleva el control de tus ganancias</string>
     <string name="bt_registro">REGISTRAR</string>
     <string name="bt_venta">VENDER</string>
-    <string name="bt_consulta">CONSULTAR TU PRODUCTO</string>
+    <string name="bt_consulta">CONSULTA PRODUCTO</string>
     <string name="bt_guardar">GUARDAR</string>
     <string name="bt_modificar">MODIFICAR</string>
     <string name="BT_limpiar">LIMPIAR CAMPOS</string>
@@ -26,6 +26,7 @@
     <string name="txt_unidades">Unidades a guardar</string>
     <string name="txt_uvendidas">Unidades a vender</string>
     <string name="txt_valcompradas">Valor de compra</string>
+    <string name="txt_estadistica">Estadisticas</string>
 
     <string-array name="Months">
         <item>Enero</item>

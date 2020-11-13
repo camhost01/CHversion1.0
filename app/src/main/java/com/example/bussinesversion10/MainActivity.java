@@ -16,7 +16,7 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button btregistro,btventa,btganancia;
+    private Button btregistro,btventa,btinventario,btestadistica;
     private AdView mAdView;
 
     @Override
@@ -40,26 +40,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btregistro = (Button)findViewById(R.id.bt_registrar);
         btventa = (Button)findViewById(R.id.bt_venta);
-        btganancia = (Button)findViewById(R.id.bt_ganancias);
+        btinventario = (Button)findViewById(R.id.bt_ganancias);
+        btestadistica = (Button)findViewById(R.id.bt_Estadistica);
 
         btregistro.setOnClickListener(this);
         btventa.setOnClickListener(this);
-        btganancia.setOnClickListener(this);
+        btinventario.setOnClickListener(this);
+        btestadistica.setOnClickListener(this);
 
     }
     public void openRegistoScreen(String sc){
         switch (sc){
             case "1":
-                Intent intent = new Intent(this, Registro.class);
-                startActivity(intent);
+                Intent registo = new Intent(this, Registro.class);
+                startActivity(registo);
                 break;
             case "2":
                 Intent abrirventas = new Intent(this, Venta.class);
                 startActivity(abrirventas);
                 break;
             case "3":
-                Intent intent3 = new Intent(this, Ganancia.class);
-                startActivity(intent3);
+                Intent inventario = new Intent(this, Ganancia.class);
+                startActivity(inventario);
+                break;
+            case "4":
+                Intent estadistica = new Intent(this,Estadistica.class);
+                startActivity(estadistica);
                 break;
         }
 
@@ -75,6 +81,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_ganancias:
                 openRegistoScreen("3");
+                break;
+            case R.id.bt_Estadistica:
+                openRegistoScreen("4");
                 break;
         }
     }

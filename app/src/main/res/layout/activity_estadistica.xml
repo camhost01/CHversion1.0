@@ -22,6 +22,23 @@
             android:orientation="vertical"
             android:visibility="gone">
 
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Producto que ha generado más ingresos: "
+                android:textColor="#F4C128"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -63,22 +80,6 @@
                     android:layout_height="match_parent" />
             </TableLayout>
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
-                android:text="Producto que ha generado más ingresos: "
-                android:textColor="#F4C128"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
-
         </LinearLayout>
 
         <TextView
@@ -92,7 +93,8 @@
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:text="Revisa los valores invertidos y obtenidos de tus productos"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Valores invertidos y obtenidos de tus productos"
             android:textColor="#F4C128"
             android:textSize="18sp"
             android:textStyle="bold|italic" />
@@ -136,6 +138,15 @@
             android:orientation="horizontal"
             android:visibility="gone">
 
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Escribe el año"
+                android:textColor="#F4C128"
+                android:textColorHint="#F4C128" />
+
             <EditText
                 android:id="@+id/et_ano"
                 android:layout_width="177dp"
@@ -144,15 +155,6 @@
                 android:hint="YYYY"
                 android:inputType="date"
                 android:maxLength="4"
-                android:textColor="#F4C128"
-                android:textColorHint="#F4C128" />
-
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Escribe el año"
                 android:textColor="#F4C128"
                 android:textColorHint="#F4C128" />
 
@@ -178,7 +180,8 @@
                 android:id="@+id/SPmonth"
                 android:layout_width="122dp"
                 android:layout_height="46dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="#F4C128" />
 
         </LinearLayout>
 

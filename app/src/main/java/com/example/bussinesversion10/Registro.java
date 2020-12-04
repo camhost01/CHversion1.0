@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -103,45 +104,51 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         String vuventa = et_vventa.getText().toString();
 
         if(!codigo.isEmpty()&&!descripcion.isEmpty()&&!vucompra.isEmpty()&&!unidades.isEmpty()&&!vuventa.isEmpty()){
+//            Cursor maxregistros = db.rawQuery("SELECT COUNT(Codigo) from producto",null); //PARA LIMITAR EL NUMERO DE REGISTROS EN LA APP
+//            maxregistros.moveToFirst();
+//            if(maxregistros.getInt(0)!=100) {
 
-            unid = Integer.parseInt(unidades);
-            valorunidadcom = Integer.parseInt(vucompra);
-            TotalCompra= unid*valorunidadcom;
-            valoruniventa = Integer.parseInt(vuventa);
-            if(!imagen.isShown()){
-                imagen.setImageResource(R.mipmap.noproduct);
-            }
-            byte[] NewEntryImg = imgeViewToByte(imagen);
-            String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-            ContentValues guardarprod = new ContentValues();
-            ContentValues invecompra = new ContentValues();
-            Cursor prod = db.rawQuery("SELECT Descripcion FROM producto WHERE Codigo='"+codigo+"'",null);
-            if(prod.moveToFirst()==false){
-                //**
-                guardarprod.put("Codigo",codigo);
-                guardarprod.put("Descripcion",descripcion);
-                guardarprod.put("unidades",unid);
-                guardarprod.put("imagen",NewEntryImg);
-                //**
-                invecompra.put("Codigo",codigo);
-                invecompra.put("FechaCompra",date);
-                invecompra.put("PrecioUnidad",valorunidadcom);
-                invecompra.put("PrecioVenta",valoruniventa);
-                invecompra.put("PrecioTotal",TotalCompra);
-                db.insert("producto",null,guardarprod);
-                db.insert("invcompra",null,invecompra);
-                db.close();
-                et_codigo.setText("");
-                et_descripcion.setText("");
-                et_vcompra.setText("");
-                et_unidades.setText("");
-                et_vventa.setText("");
-                imagen.setImageResource(android.R.color.transparent);
-                ln.setVisibility(View.GONE);
-                Toast.makeText(this, "Producto guardado exitosamente", Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(this, "Producto existente, modificalo para Actualizar Stock", Toast.LENGTH_SHORT).show();
-            }
+                unid = Integer.parseInt(unidades);
+                valorunidadcom = Integer.parseInt(vucompra);
+                TotalCompra = unid * valorunidadcom;
+                valoruniventa = Integer.parseInt(vuventa);
+                if (!imagen.isShown()) {
+                    imagen.setImageResource(R.mipmap.noproduct);
+                }
+                byte[] NewEntryImg = imgeViewToByte(imagen);
+                String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                ContentValues guardarprod = new ContentValues();
+                ContentValues invecompra = new ContentValues();
+                Cursor prod = db.rawQuery("SELECT Descripcion FROM producto WHERE Codigo='" + codigo + "'", null);
+                if (prod.moveToFirst() == false) {
+                    //**
+                    guardarprod.put("Codigo", codigo);
+                    guardarprod.put("Descripcion", descripcion);
+                    guardarprod.put("unidades", unid);
+                    guardarprod.put("imagen", NewEntryImg);
+                    //**
+                    invecompra.put("Codigo", codigo);
+                    invecompra.put("FechaCompra", date);
+                    invecompra.put("PrecioUnidad", valorunidadcom);
+                    invecompra.put("PrecioVenta", valoruniventa);
+                    invecompra.put("PrecioTotal", TotalCompra);
+                    db.insert("producto", null, guardarprod);
+                    db.insert("invcompra", null, invecompra);
+                    db.close();
+                    et_codigo.setText("");
+                    et_descripcion.setText("");
+                    et_vcompra.setText("");
+                    et_unidades.setText("1");
+                    et_vventa.setText("");
+                    ln.setVisibility(View.GONE);
+                    Toast.makeText(this, "Producto guardado exitosamente", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Producto existente, modificalo para Actualizar Stock", Toast.LENGTH_SHORT).show();
+                }
+
+//       } else{
+//                Toast.makeText(this, "Version de prueba finalizada actualiza a version pro", Toast.LENGTH_LONG).show();
+//            }
         }else{
             Toast.makeText(this, "Debes ingresar información en todos los campos", Toast.LENGTH_LONG).show();
         }
@@ -187,11 +194,13 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
             Toast.makeText(this, "Producto actualizado correctamente", Toast.LENGTH_SHORT).show();
             imagen.setImageResource(android.R.color.transparent);
             ln.setVisibility(View.GONE);
+            et_codigo.setText("");
             et_descripcion.setText("");
             et_vcompra.setText("");
-            et_unidades.setText("");
+            et_unidades.setText("1");
             et_vventa.setText("");
             bt_modificar.setEnabled(false);
+            bt_modificar.setTextColor(Color.parseColor("#F1DA95"));
         }else{
             Toast.makeText(this, "Debes ingresar información en todos los campos e Imagen", Toast.LENGTH_SHORT).show();
         }
@@ -210,6 +219,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
             Cursor fila = db.rawQuery("SELECT Descripcion, Unidades, imagen FROM producto WHERE Codigo ='"+codigo+"'", null);
             if(fila.moveToFirst())
             {
+
                 et_descripcion.setText(fila.getString(0));
                 et_unidades.setText(fila.getString(1));
                 byte[] photo = fila.getBlob(2);
@@ -219,6 +229,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                 imagen.setImageBitmap(theImage);
                 db.close();
                 bt_modificar.setEnabled(true);
+                bt_modificar.setTextColor(Color.parseColor("#F4C128"));
                 Cursor fila2 = db2.rawQuery("SELECT PrecioUnidad,PrecioVenta from invcompra WHERE Codigo ='"+codigo+"'",null);
                 if(fila2.moveToFirst())
                 {

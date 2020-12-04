@@ -108,22 +108,23 @@ public class Estadistica extends AppCompatActivity implements View.OnClickListen
         AdminSQLActivities andro = new AdminSQLActivities(this, "administracion", null, 1);
         SQLiteDatabase db = andro.getWritableDatabase();
         Cursor msvendido = db.rawQuery("SELECT MAX(VentaTotal) from invventa",null);
-        if(msvendido.moveToFirst()){
-            txt_mvendido.setText(msvendido.getString(0));
-            Cursor imagen = db.rawQuery("SELECT pr.imagen, MAX(inv.VentaTotal) from producto pr, invventa inv " +
-                    "WHERE pr.Codigo=inv.Codigo",null);
-            Bitmap bm = null;
-            if(imagen.moveToFirst()){
-                byte[] photo = imagen.getBlob(0);
-                ByteArrayInputStream inputStream = new ByteArrayInputStream(photo);
-                Bitmap theImage = BitmapFactory.decodeStream(inputStream);
-                imageView.setImageBitmap(theImage);
-                ln_vendido.setVisibility(View.VISIBLE);
+        if (msvendido.moveToFirst()) {
+            if (msvendido.getString(0)!=null) {
+                txt_mvendido.setText(msvendido.getString(0));
+                Cursor imagen = db.rawQuery("SELECT pr.imagen, MAX(inv.VentaTotal) from producto pr, invventa inv " +
+                        "WHERE pr.Codigo=inv.Codigo", null);
+                Bitmap bm = null;
+                if (imagen.moveToFirst()) {
+                    byte[] photo = imagen.getBlob(0);
+                    ByteArrayInputStream inputStream = new ByteArrayInputStream(photo);
+                    Bitmap theImage = BitmapFactory.decodeStream(inputStream);
+                    imageView.setImageBitmap(theImage);
+                    ln_vendido.setVisibility(View.VISIBLE);
+                    db.close();
+                }
             }
-            db.close();
         }else {
-            Toast.makeText(this,"No Existen Registros",Toast.LENGTH_SHORT).show();
-            db.close();
+
         }
 
     }
@@ -184,19 +185,21 @@ public class Estadistica extends AppCompatActivity implements View.OnClickListen
         String fecha = ano + "-" + Month;
         if (!ano.isEmpty()) {
             Cursor fila = db.rawQuery("SELECT SUM(PrecioTotal) FROM invcompra WHERE FechaCompra LIKE '" + fecha + "%' ", null);
-            if (fila.moveToNext()) {
-                et_TotaInv.setText(fila.getString(0));
-                Cursor dateend = db.rawQuery("SELECT SUM(VentaTotal) FROM invventa WHERE FechaVenta LIKE '" + fecha + "%'", null);
-                if (dateend.moveToNext()) {
-                    et_TotaGan.setText(dateend.getString(0));
-                } else {
-                    Toast.makeText(this, "Dato venta no Existe", Toast.LENGTH_SHORT).show();
+            if (fila.moveToFirst()) {
+                if(fila.getString(0)!=null) {
+                    et_TotaInv.setText(fila.getString(0));
+                    Cursor dateend = db.rawQuery("SELECT SUM(VentaTotal) FROM invventa WHERE FechaVenta LIKE '" + fecha + "%'", null);
+                    if (dateend.moveToFirst()) {
+                        et_TotaGan.setText(dateend.getString(0));
+                    } else {
+                        Toast.makeText(this, "Dato venta no Existe", Toast.LENGTH_SHORT).show();
+                        db.close();
+                    }
+                }else {
+                    Toast.makeText(this, "Dato compra no Existe", Toast.LENGTH_SHORT).show();
                     db.close();
                 }
-            } else {
-                Toast.makeText(this, "Dato compra no Existe", Toast.LENGTH_SHORT).show();
-                db.close();
-            }
+             }
         } else {
             Toast.makeText(this, "Ingresa el Año que deseas verificar", Toast.LENGTH_LONG).show();
             db.close();

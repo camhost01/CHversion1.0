@@ -71,6 +71,7 @@ public class Venta extends AppCompatActivity implements View.OnClickListener{
         et_vventa = (EditText)findViewById(R.id.txt_vventa);
         et_uventa = (EditText)findViewById(R.id.txt_uvender);
 
+
     }
     //Metodo para Vender el producto
     public void venderproducto()
